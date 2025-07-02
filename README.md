@@ -1,6 +1,8 @@
 https://cdimage.debian.org/mirror/cdimage/archive/11.11.0/amd64/iso-cd/
 
-hmod -R 777
+burakdaki mariadb dockerfileda forstman1 gibi script.sh olmaması ve conf dosyalarındaki bind-address satırı
+
+chmod -R 777
 
 su
 
