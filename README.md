@@ -32,7 +32,7 @@ services:
     command: ["echo", "Hello from Docker Compose!"]
 
 docker images          # List locally available images
-docker ps              # List running containers
+docker ps              # List running containers (process status)
 docker ps -a           # List all containers (including stopped)
 docker pull debian:11  # Download the Debian 12 image
 docker run -it debian:12 bash  # Start a container interactively
@@ -40,15 +40,59 @@ docker stop <container_name_or_id>
 
 ----
 
--f
-- Without -f, docker-compose defaults to docker-compose.yml in the current directory
-- is it redundant???
+Image:
+- A Docker image is a static file—a snapshot with all the code, libraries, dependencies, and configuration needed to run an application.
+- It's like a "blueprint" or "template".
+- You can share images via registries (like Docker Hub).
 
--d
-- detached mode"
-- It runs the containers in the background and prints only the container IDs.
-- Without -d, the logs of the containers will be shown in your terminal and you won't get your prompt back until you stop the process.
+Container:
+- A container is a running (or stopped) instance of an image.
+- It’s a live, isolated environment that runs your application.
+- Containers are created from images, and you can have many containers running from the same image.
 
+----
+
+Network Modes:
+
+bridge
+- The default network for containers.
+- When you run a container without specifying a network, it connects to bridge.
+- Acts like a virtual switch/router, allowing containers on the same bridge network to communicate.
+- Containers on bridge can talk to each other (using internal IP addresses) and can access the outside world, but are isolated from containers on other networks.
+
+host
+- Removes network isolation between the container and the host.
+- The container shares the host’s network stack (same IP, same ports).
+- Useful for performance or when you want the container to be "invisible" as a separate network device.
+- Only available on Linux.
+
+none
+- The container has no network access.
+- No network interfaces except for lo (localhost).
+- Used for security, or when you want to completely isolate the container from all networking.
+
+----
+
+bridge
+- Default for user containers
+- Isolated
+- Between containers on bridge
+
+host
+- High performance, special cases
+- Not isolated
+- Host and container are same
+
+none
+- Maximum isolation, security
+- Fully isolated
+- No network access
+
+----
+
+
+
+----
 
 make up: @docker-compose -f ./docker-compose.yml up -d
 - Builds images (if needed).

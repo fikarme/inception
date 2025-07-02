@@ -33,9 +33,9 @@ This means you must build the Docker images for your project yourself. It is the
 den to pull ready-made Docker images or use services such as DockerHub (Alpine/Debian
 being excluded from this rule).
 
-```
+
 You then have to set up:
-```
+
 - A Docker container that contains NGINX with TLSv1.2 or TLSv1.3 only.
 - A Docker container that contains WordPress with php-fpm (it must be installed
     and configured) only, without nginx.
@@ -44,19 +44,19 @@ You then have to set up:
 - A second volume that contains your WordPress website files.
 - Adocker-networkthat establishes the connection between your containers.
 
-```
+
 Your containers must restart automatically in case of a crash.
-```
-```
+
+
 A Docker container is not a virtual machine. Thus, it is not
 recommended to use any hacky patches based on ’tail -f’ and similar
 methods when trying to run it. Read about how daemons work and
 whether it’s a good idea to use them or not.
-```
+
 
 Inception
 
-```
+
 Of course, using network: host or --link or links: is forbidden.
 The network line must be present in your docker-compose.yml file.
 Your containers must not be started with a command running an
@@ -64,27 +64,27 @@ infinite loop. Thus, this also applies to any command used as
 entrypoint, or used in entrypoint scripts. The following are a
 few prohibited hacky patches: tail -f, bash, sleep infinity, while
 true.
-```
-```
+
+
 Read about PID 1 and the best practices for writing Dockerfiles.
-```
+
 - In your WordPress database, there must be two users, one of them being the admin-
     istrator. The administrator’s username must not contain ’admin’, ’Admin’, ’admin-
     istrator’, or ’Administrator’ (e.g., admin, administrator, Administrator, admin-123,
     etc.).
 
-```
+
 Your volumes will be available in the /home/login/data folder of the
 host machine using Docker. Of course, you have to replace the login
 with yours.
-```
+
 To simplify the process, you must configure your domain name to point to your local
 IP address.
 This domain name must belogin.42.fr. Again, you must use your own login.
 For example, if your login is ’wil’,wil.42.frwill redirect to the IP address pointing to
 Wil’s website.
 
-```
+
 The latest tag is prohibited.
 Passwords must not be present in your Dockerfiles.
 The use of environment variables is mandatory.
@@ -94,20 +94,20 @@ confidential information.
 Your NGINX container must be the sole entry point into your
 infrastructure, accessible only via port 443, using the TLSv1.
 or TLSv1.3 protocol.
-```
+
 
 Inception
 
-```
+
 Here is an example diagram of the expected result:
-```
+
 
 Inception
 
-```
+
 Below is an example of the expected directory structure:
-```
-```
+
+
 $> ls -alR
 total XX
 drwxrwxr-x 3 wil wil 4096 avril 42 20:.
@@ -162,17 +162,16 @@ DOMAIN_NAME=wil.42.fr
 MYSQL_USER=XXXXXXXXXXXX
 [...]
 $>
-```
-```
+
+
 For obvious security reasons, any credentials, API keys, passwords,
 etc., must be saved locally in various ways / files and ignored by
 git. Publicly stored credentials will lead you directly to a failure
 of the project.
-```
+
 
 Inception
 
-```
+
 You can store your variables (as a domain name) in an environment
 variable file like .env
-```
