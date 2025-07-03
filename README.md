@@ -4,6 +4,8 @@ burakdaki mariadb dockerfileda forstman1 gibi script.sh olmaması ve conf dosyal
 
 chmod -R 777
 
+sudo nano /etc/hosts
+
 su
 
 sudo apt-get update && apt-get install make docker.io docker-compose
