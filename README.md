@@ -11,14 +11,6 @@ su
 sudo apt-get update && apt-get install make docker.io docker-compose
 
 sudo apt update
-sudo apt install ca-certificates curl gnupg
-sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-echo \
-  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 sudo docker run hello-world
@@ -38,8 +30,8 @@ services:
 docker images          # List locally available images
 docker ps              # List running containers (process status)
 docker ps -a           # List all containers (including stopped)
-docker pull debian:11  # Download the Debian 12 image
-docker run -it debian:12 bash  # Start a container interactively
+docker pull debian:11  # Download the Debian 11 image
+docker run -it debian:11 bash  # Start a container interactively
 docker stop <container_name_or_id>
 
 ----
