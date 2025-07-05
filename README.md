@@ -7,17 +7,15 @@ chmod -R 777
 sudo nano /etc/hosts
 
 su
-
-sudo apt-get update && apt-get install make docker.io docker-compose
-
 sudo apt update
+sudo apt upgrade
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 sudo docker run hello-world
 docker compose version
 
 mkdir test-docker && cd test-docker
-echo -e "FROM debian:12\nCMD [\"echo\", \"Hello from Debian!\"]" > Dockerfile
+echo -e "FROM debian:11\nCMD [\"echo\", \"Hello from Debian!\"]" > Dockerfile
 docker build -t my-debian-test .
 docker run my-debian-test
 
